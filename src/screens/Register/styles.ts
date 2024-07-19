@@ -2,16 +2,17 @@ import { StyleSheet } from 'react-native';
 import { theme } from '../../theme';
 
 export const styles = StyleSheet.create({
-  loginContainer: {
+  registerContainer: {
     flex: 1,
     backgroundColor: theme.colors.indigo900,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 25,
+    paddingHorizontal:25
   },
   formContainer: {
-    width: '100%',
+   width:"100%",
     gap: 24,
+   
   },
   titleContainer: {
     width: '100%',
@@ -24,22 +25,11 @@ export const styles = StyleSheet.create({
     color: theme.colors.indigo50,
   },
   subtitle: {
-    
     fontFamily: theme.font_weight.regular,
     fontSize: theme.font_size.md,
     color: theme.colors.indigo100,
   },
-  qrContainer: {
-    width: '100%',
-    height: 33,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  qrText: {
-    fontFamily: theme.font_weight.bold,
-    fontSize: theme.font_size.lg,
-    color: theme.colors.indigo50,
-  },
+
   linkContainer: {
     textAlign: 'center',
     fontFamily: theme.font_weight.regular,
