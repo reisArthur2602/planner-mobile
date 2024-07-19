@@ -10,6 +10,7 @@ import {
 import Routes from './src/routes';
 import { theme } from './src/theme';
 import Header from './src/components/Header';
+import { AuthProvider } from './src/context/authContext';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -28,8 +29,10 @@ export default function App() {
   return (
     <>
       <StatusBar backgroundColor={theme.colors.indigo900} />
-      <Header />
-      <Routes />
+      <AuthProvider>
+        <Header />
+        <Routes />
+      </AuthProvider>
     </>
   );
 }
