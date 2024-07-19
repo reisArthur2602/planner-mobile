@@ -8,9 +8,10 @@ export const theme = {
     indigo50: '#E2DDFE',
   },
   font_size: {
-    lg: 16,
-    sm: 14,
     md: 12,
+    sm: 14,
+    lg: 16,
+    x_lg: 32
   },
   font_weight: {
     regular: 'Inter_400Regular',
