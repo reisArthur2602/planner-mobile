@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import StackRoutes from './stack.routes';
 import TabRoutes from './tab.routes';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 
 const Routes = () => {
   const loading = false;
