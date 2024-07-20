@@ -8,11 +8,11 @@ const { Navigator, Screen } = createBottomTabNavigator();
 
 const TabRoutes = () => {
   return (
-    <Navigator>
+    <Navigator screenOptions={{ headerShown: false }}>
       <Screen name="Dashboard" component={Dashboard} />
       <Screen name="Task" component={Task} />
       <Screen name="Late" component={Late} />
-      <Screen name="Edit" component={Edit}/>
+      <Screen name="Edit" component={Edit} />
     </Navigator>
   );
 };

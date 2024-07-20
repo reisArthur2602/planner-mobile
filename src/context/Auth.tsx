@@ -3,6 +3,7 @@ import { UserService } from '../services/user/UserService';
 import { User } from '../@types/user';
 import { useToken } from '../hooks/useToken';
 import { Api } from '../services/api/axios-config';
+import { DashboardProvider } from './Dashboard';
 
 interface IAuthContext {
   user: User | null;
@@ -57,7 +58,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     <AuthContext.Provider
       value={{ user, loading, auth: !!user, handleLogin, handleRegister }}
     >
-      {children}
+      <DashboardProvider>{children}</DashboardProvider>
     </AuthContext.Provider>
   );
 };

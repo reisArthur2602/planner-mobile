@@ -1,12 +1,15 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { Text, SafeAreaView } from 'react-native';
+import React from 'react';
+import { styles } from './styles';
+import FilterBar from '../../components/FilterBar';
 
 const Dashboard = () => {
   return (
-    <View>
-      <Text>Dashboard</Text>
-    </View>
-  )
-}
+    <SafeAreaView style={styles.dashboardContainer}>
+      {/* filtro */}
+      <FilterBar />
+    </SafeAreaView>
+  );
+};
 
-export default Dashboard
+export default Dashboard;

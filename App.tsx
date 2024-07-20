@@ -10,7 +10,7 @@ import {
 import Routes from "./src/routes";
 import { theme } from "./src/theme";
 import Header from "./src/components/Header";
-import { AuthProvider } from "./src/context/authContext";
+import { AuthProvider } from "./src/context/Auth";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
