@@ -1,13 +1,13 @@
-import { NavigationContainer } from '@react-navigation/native';
-import StackRoutes from './stack.routes';
-import TabRoutes from './tab.routes';
-import { ActivityIndicator, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import StackRoutes from "./stack.routes";
+import TabRoutes from "./tab.routes";
+import { ActivityIndicator, Text, View } from "react-native";
+import { useAuth } from "../hooks/useAuth";
 
 const Routes = () => {
-  const loading = false;
-  const auth = false;
+  const { loading, auth } = useAuth();
 
-  if (loading) return <ActivityIndicator size={40} />;
+  if (loading) return <ActivityIndicator size={60} />;
 
   return (
     <NavigationContainer>

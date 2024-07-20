@@ -1,11 +1,20 @@
-import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
-import React from 'react';
-import { styles } from './styles';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
-import { Link } from '@react-navigation/native';
+import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { styles } from "./styles";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
+import { Link } from "@react-navigation/native";
+import { useAuth } from "../../hooks/useAuth";
 
 const Login = () => {
+  const { handleLogin } = useAuth();
+  const [email, setEmail] = useState("");
+
+  const OnSubmit = async () => {
+    if (!email) return alert("O email é obrigatório");
+    await handleLogin(email);
+  };
+
   return (
     <SafeAreaView style={styles.loginContainer}>
       {/* form */}
@@ -19,14 +28,18 @@ const Login = () => {
         </View>
         {/* input button qrcode*/}
         <View style={{ gap: 12 }}>
-          <Input label="Email" placeholder="email@email.com" />
-          <Button title="Entrar" />
+          <Input
+            label="Email"
+            placeholder="email@email.com"
+            onChangeText={setEmail}
+          />
+          <Button title="Entrar" onPress={OnSubmit} />
           <TouchableOpacity style={styles.qrContainer}>
             <Text style={styles.qrText}>Entrar com código QR</Text>
           </TouchableOpacity>
         </View>
         <Text style={styles.linkContainer}>
-          Não possui uma conta? {''}
+          Não possui uma conta? {""}
           <Link to="/Register" style={styles.linkHighlight}>
             Fazer Cadastro
           </Link>
