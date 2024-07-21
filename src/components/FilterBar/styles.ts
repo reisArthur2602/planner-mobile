@@ -3,19 +3,17 @@ import { theme } from '../../theme';
 
 export const styles = StyleSheet.create({
   filterContainer: {
-    maxHeight:67,
-    flex:1,
+    width: '100%',
+    height: 67,
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    padding: 24,
   },
   filterText: {
     fontFamily: theme.font_weight.bold,
     fontSize: theme.font_size.sm,
   },
 });
-
 
 export const activeStyle = {
   color: theme.colors.indigo600,

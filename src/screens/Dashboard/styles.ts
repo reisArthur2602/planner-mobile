@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
     dashboardContainer : {
         flex:1,
         backgroundColor:theme.colors.indigo900,
-        gap:24
+        gap:24,
+        paddingHorizontal: 18,
     }
 });
