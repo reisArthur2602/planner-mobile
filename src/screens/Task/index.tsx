@@ -9,30 +9,46 @@ import DateTimePicker, {
 } from '@react-native-community/datetimepicker';
 import { format, isPast } from 'date-fns';
 import { Button, GhostButton } from '../../components/Button';
+import { TaskService } from '../../services/task/TaskService';
+import { useDashboard } from '../../hooks/useDashboard';
+import { useNavigation } from '@react-navigation/native';
 
 const Task = () => {
+  const navigate = useNavigation();
+  const { toggleType, type } = useDashboard();
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
 
   const [showDate, setShowDate] = useState(false);
   const [showTime, setShowTime] = useState(false);
 
+  const onSubmit = async () => {
+    const data = {
+      title,
+      description,
+      type,
+      when: `${format(date, 'yyyy-MM-dd')}T${format(time, 'HH:mm')}:00.000`,
+    };
+    await TaskService.create(data);
+    alert('Tarefa criada com sucesso!');
+    toggleType('gym');
+    setTitle('');
+    setDescription('');
+    setDate(new Date());
+    setTime(new Date());
+    navigate.goBack();
+  };
+
   const handleSelectDate = (e: DateTimePickerEvent, selectData?: Date) => {
-    if (isPast(new Date(selectData || date))) {
-      alert('Defina uma data no futuro');
-      setShowDate(false);
-      return;
-    }
     setDate(selectData || date);
     setShowDate(false);
   };
 
   const handleSelectTime = (e: DateTimePickerEvent, selectTime?: Date) => {
-    if (isPast(new Date(selectTime || time))) {
-      alert('Defina uma hora no futuro');
-      setShowTime(false);
-      return;
-    }
     setTime(selectTime || time);
     setShowTime(false);
   };
@@ -40,12 +56,17 @@ const Task = () => {
   return (
     <SafeAreaView style={styles.taskContainer}>
       <TypeBar />
-      <Input label="Título" placeholder="Título da tarefa" />
+      <Input
+        label="Título"
+        placeholder="Título da tarefa"
+        onChangeText={setTitle}
+      />
       <Textarea
         label="Descrição"
         placeholder="Descrição da tarefa"
         multiline
         numberOfLines={4}
+        onChangeText={setDescription}
       />
 
       <Pressable onPress={() => setShowDate(true)}>
@@ -79,7 +100,7 @@ const Task = () => {
       )}
 
       <View style={{ gap: 12 }}>
-        <Button title="Criar" />
+        <Button title="Criar" onPress={onSubmit} />
         <GhostButton title="Cancelar" />
       </View>
     </SafeAreaView>
