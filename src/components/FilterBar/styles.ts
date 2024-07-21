@@ -3,11 +3,12 @@ import { theme } from '../../theme';
 
 export const styles = StyleSheet.create({
   filterContainer: {
-    width: '100%',
+    maxHeight:67,
+    flex:1,
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    padding: 18,
+    padding: 24,
   },
   filterText: {
     fontFamily: theme.font_weight.bold,

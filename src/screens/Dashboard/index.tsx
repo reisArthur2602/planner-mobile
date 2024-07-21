@@ -1,4 +1,4 @@
-import { Text, SafeAreaView } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import React from 'react';
 import { styles } from './styles';
 import FilterBar from '../../components/FilterBar';
