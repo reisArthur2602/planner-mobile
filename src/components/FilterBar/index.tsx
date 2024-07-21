@@ -24,7 +24,7 @@ const FilterBar = () => {
   return (
     <View style={styles.filterContainer}>
       {FilterData.map((f) => (
-        <TouchableOpacity onPress={() => toggleFilter(f.type)}>
+        <TouchableOpacity key={f.type} onPress={() => toggleFilter(f.type)}>
           <Text
             style={[
               styles.filterText,
