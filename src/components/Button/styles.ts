@@ -15,4 +15,11 @@ export const styles = StyleSheet.create({
     fontFamily: theme.font_weight.medium,
     color: theme.colors.indigo50,
   },
+  btnGhostButton: {
+    width: '100%',
+    height: 33,
+    borderRadius: 6,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

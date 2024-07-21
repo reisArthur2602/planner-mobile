@@ -1,4 +1,4 @@
-import { Pressable, SafeAreaView } from 'react-native';
+import { Pressable, SafeAreaView, View } from 'react-native';
 import { styles } from './style';
 import TypeBar from '../../components/TypeBar';
 import { Input, Textarea } from '../../components/Input';
@@ -8,6 +8,7 @@ import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
 import { format, isPast } from 'date-fns';
+import { Button, GhostButton } from '../../components/Button';
 
 const Task = () => {
   const [date, setDate] = useState(new Date());
@@ -76,6 +77,11 @@ const Task = () => {
           display="clock"
         />
       )}
+
+      <View style={{ gap: 12 }}>
+        <Button title="Criar" />
+        <GhostButton title="Cancelar" />
+      </View>
     </SafeAreaView>
   );
 };

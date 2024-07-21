@@ -12,5 +12,12 @@ const Button = ({ title, ...props }: IButton) => {
     </TouchableOpacity>
   );
 };
+const GhostButton = ({ title, ...props }: IButton) => {
+  return (
+    <TouchableOpacity {...props} style={styles.btnGhostButton}>
+      <Text style={styles.btnText}>{title}</Text>
+    </TouchableOpacity>
+  );
+};
 
-export default Button;
+export { Button, GhostButton };
