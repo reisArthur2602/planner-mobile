@@ -1,12 +1,20 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { Text, SafeAreaView } from 'react-native';
+import React from 'react';
+import { styles } from './styles';
+import { RouteProp, useRoute } from '@react-navigation/native';;
+import { RootTabParamList } from '../../routes/tab.routes';
+
 
 const Edit = () => {
-  return (
-    <View>
-      <Text>Edit</Text>
-    </View>
-  )
-}
+  const { params } = useRoute<RouteProp<RootTabParamList, 'Edit'>>();
 
-export default Edit
+  const { id } = params;
+  return (
+    <SafeAreaView style={styles.editContainer}>
+      <Text>Edit</Text>
+   
+    </SafeAreaView>
+  );
+};
+
+export default Edit;

@@ -14,6 +14,10 @@ import {
 import { styles } from './styles';
 import { format } from 'date-fns';
 import { theme } from '../../theme';
+import { useNavigation } from '@react-navigation/native';
+
+import { RootTabParamList } from '../../routes/tab.routes';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 
 const getTypeIcon = (type: TypeTask) => {
   switch (type) {
@@ -37,13 +41,23 @@ const getTypeIcon = (type: TypeTask) => {
 interface ITaskCard {
   title: string;
   when: string;
-  id?: string;
+  id: string;
   type: TypeTask;
 }
 
-const TaskCard = ({ title, type, when }: ITaskCard) => {
+const TaskCard = ({ id, title, type, when }: ITaskCard) => {
+  const navigation =
+    useNavigation<BottomTabNavigationProp<RootTabParamList, 'Edit'>>();
+
+  const navigateToEdit = (id: string) => {
+    navigation.navigate('Edit', { id });
+  };
+
   return (
-    <TouchableOpacity style={styles.taskContainer}>
+    <TouchableOpacity
+      style={styles.taskContainer}
+      onPress={() => navigateToEdit(id)}
+    >
       <View style={styles.iconTask}>{getTypeIcon(type)}</View>
 
       <Text style={styles.title}>{title}</Text>

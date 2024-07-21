@@ -6,7 +6,14 @@ import Late from '../screens/Late';
 import { theme } from '../theme';
 import { Bell, House, SquareCheckBig } from 'lucide-react-native';
 
-const { Navigator, Screen } = createBottomTabNavigator();
+export type RootTabParamList = {
+  Dashboard: undefined;
+  Task: undefined;
+  Late: undefined;
+  Edit: { id: string };
+};
+
+const { Navigator, Screen } = createBottomTabNavigator<RootTabParamList>();
 
 const TabRoutes = () => {
   return (
