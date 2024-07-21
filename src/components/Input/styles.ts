@@ -20,4 +20,15 @@ export const styles = StyleSheet.create({
     borderStyle: 'solid',
     color: theme.colors.indigo100,
   },
+
+  textarea:{
+    height: 120,
+    padding: 12,
+    borderRadius: 6,
+    borderColor: theme.colors.indigo700,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    color: theme.colors.indigo100,
+    textAlignVertical:'top'
+  }
 });

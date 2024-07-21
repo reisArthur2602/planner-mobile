@@ -1,7 +1,7 @@
 import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { styles } from "./styles";
-import Input from "../../components/Input";
+import {Input} from "../../components/Input";
 import Button from "../../components/Button";
 import { Link } from "@react-navigation/native";
 import { useAuth } from "../../hooks/useAuth";

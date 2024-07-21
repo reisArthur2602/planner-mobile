@@ -20,4 +20,17 @@ const Input = ({ label, ...props }: IInput) => {
   );
 };
 
-export default Input;
+const Textarea = ({ label, ...props }: IInput) => {
+  return (
+    <View style={styles.inputContainer}>
+      <Text style={styles.label}>{label}</Text>
+      <TextInput
+        style={styles.textarea}
+        {...props}
+        placeholderTextColor={theme.colors.indigo100}
+      />
+    </View>
+  );
+};
+
+export { Input, Textarea };
