@@ -1,23 +1,36 @@
-import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import {
+  Text,
+  TextProps,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from 'react-native';
 import { styles } from './styles';
+import { theme } from '../../../theme';
 
-interface IButton extends TouchableOpacityProps {
-  title: string;
-}
-
-const Button = ({ title, ...props }: IButton) => {
+const Button = ({ children, ...rest }: TouchableOpacityProps) => {
   return (
-    <TouchableOpacity {...props} style={styles.btnContainer}>
-      <Text style={styles.btnText}>{title}</Text>
-    </TouchableOpacity>
-  );
-};
-const GhostButton = ({ title, ...props }: IButton) => {
-  return (
-    <TouchableOpacity {...props} style={styles.btnGhostButton}>
-      <Text style={styles.btnText}>{title}</Text>
+    <TouchableOpacity style={styles.btnContainer} {...rest}>
+      {children}
     </TouchableOpacity>
   );
 };
 
-export { Button, GhostButton };
+const Filled = ({ children, style, ...rest }: TouchableOpacityProps) => {
+  return (
+    <TouchableOpacity
+      style={[styles.btnContainer, { backgroundColor: theme.colors.indigo600 }]}
+      {...rest}
+    >
+      {children}
+    </TouchableOpacity>
+  );
+};
+
+const Label = ({ children }: TextProps) => {
+  return <Text style={styles.btnText}>{children}</Text>;
+};
+
+Button.Label = Label;
+Button.Filled = Filled;
+
+export { Button };

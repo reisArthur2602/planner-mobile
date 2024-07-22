@@ -18,17 +18,16 @@ const Register = () => {
 
   return (
     <SafeAreaView style={styles.registerContainer}>
-      {/* form */}
       <View style={styles.formContainer}>
-        {/* title */}
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Crie sua conta</Text>
           <Text style={styles.subtitle}>
             Preencha o formulário para criar sua conta
           </Text>
         </View>
-        {/* input button qrcode*/}
+
         <View style={{ gap: 12 }}>
+
           <Input>
             <Input.Label>Email</Input.Label>
             <Input.Field
@@ -37,7 +36,10 @@ const Register = () => {
             />
           </Input>
 
-          <Button title="Cadastrar" onPress={OnSubmit} />
+          <Button.Filled onPress={OnSubmit}>
+            <Button.Label>Cadastrar</Button.Label>
+          </Button.Filled>
+          
         </View>
         <Text style={styles.linkContainer}>
           Já possui uma conta? {''}

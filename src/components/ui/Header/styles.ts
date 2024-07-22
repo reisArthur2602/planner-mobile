@@ -1,16 +1,17 @@
 import { StyleSheet } from 'react-native';
-import { theme } from '../../theme';
+import { theme } from '../../../theme';
+
 
 export const styles = StyleSheet.create({
   headerContainer: {
     width: '100%',
+    height: 72,
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: theme.colors.indigo900,
     borderBottomColor: theme.colors.indigo800,
     borderBottomWidth: 3,
     borderStyle: 'solid',
-    height: 72,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   logo: {
     width: 96,

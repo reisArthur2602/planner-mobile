@@ -30,7 +30,6 @@ const Login = () => {
         {/* input button qrcode*/}
 
         <View style={{ gap: 12 }}>
-          
           <Input>
             <Input.Label>Email</Input.Label>
             <Input.Field
@@ -39,7 +38,10 @@ const Login = () => {
             />
           </Input>
 
-          <Button title="Entrar" onPress={OnSubmit} />
+          <Button.Filled onPress={OnSubmit}>
+            <Button.Label>Entrar</Button.Label>
+          </Button.Filled>
+          
           <TouchableOpacity style={styles.qrContainer}>
             <Text style={styles.qrText}>Entrar com código QR</Text>
           </TouchableOpacity>

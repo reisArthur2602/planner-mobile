@@ -6,8 +6,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.indigo900,
     padding: 24,
-    gap:24
+    justifyContent: 'space-between',
   },
-
-  taskForm: {},
 });

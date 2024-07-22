@@ -12,8 +12,7 @@ import { TaskService } from '../../services/task/TaskService';
 import { useDashboard } from '../../hooks/useDashboard';
 import { useNavigation } from '@react-navigation/native';
 import { Input } from '../../components/ui/Input';
-import { Button, GhostButton } from '../../components/ui/Button';
-
+import { Button } from '../../components/ui/Button';
 
 const Task = () => {
   const navigate = useNavigation();
@@ -65,8 +64,8 @@ const Task = () => {
       </Input>
 
       <Input>
-        <Input.Textarea>Descrição</Input.Textarea>
-        <Input.Field
+        <Input.Label>Descrição</Input.Label>
+        <Input.Textarea
           placeholder="Descrição da tarefa"
           multiline
           numberOfLines={4}
@@ -107,8 +106,13 @@ const Task = () => {
       )}
 
       <View style={{ gap: 12 }}>
-        <Button title="Criar" onPress={onSubmit} />
-        <GhostButton title="Cancelar" />
+        <Button.Filled onPress={onSubmit}>
+          <Button.Label>Criar</Button.Label>
+        </Button.Filled>
+
+        <Button>
+          <Button.Label>Cancelar</Button.Label>
+        </Button>
       </View>
     </SafeAreaView>
   );
