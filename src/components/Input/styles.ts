@@ -6,19 +6,22 @@ export const styles = StyleSheet.create({
     width: '100%',
     gap: 6,
   },
+
   label: {
     fontSize: theme.font_size.sm,
     fontFamily: theme.font_weight.medium,
     color: theme.colors.indigo50,
   },
+
   input: {
+    flex:1,
     height: 37,
     paddingHorizontal: 12,
+    color: theme.colors.indigo100,
     borderRadius: 6,
     borderColor: theme.colors.indigo700,
     borderWidth: 1,
     borderStyle: 'solid',
-    color: theme.colors.indigo100,
   },
 
   textarea:{

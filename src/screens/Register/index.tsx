@@ -1,8 +1,8 @@
 import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { styles } from './styles';
-import {Input} from '../../components/Input';
-import {Button} from '../../components/Button';
+import { Input } from '../../components/Input';
+import { Button } from '../../components/Button';
 import { Link } from '@react-navigation/native';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -28,11 +28,14 @@ const Register = () => {
         </View>
         {/* input button qrcode*/}
         <View style={{ gap: 12 }}>
-          <Input
-            label="Email"
-            placeholder="email@email.com"
-            onChangeText={setEmail}
-          />
+          <Input>
+            <Input.Label>Email</Input.Label>
+            <Input.Field
+              placeholder="email@email.com"
+              onChangeText={setEmail}
+            />
+          </Input>
+
           <Button title="Cadastrar" onPress={OnSubmit} />
         </View>
         <Text style={styles.linkContainer}>

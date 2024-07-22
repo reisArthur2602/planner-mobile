@@ -1,36 +1,53 @@
-import { View, Text, TextInputProps, TextInput } from 'react-native';
+import {
+  View,
+  Text,
+  TextInputProps,
+  TextInput,
+  ViewProps,
+  TextProps,
+} from 'react-native';
 import React from 'react';
 import { theme } from '../../theme';
 import { styles } from './styles';
 
-interface IInput extends TextInputProps {
-  label: string;
-}
-
-const Input = ({ label, ...props }: IInput) => {
+const Input = ({ children, style, ...rest }: ViewProps) => {
   return (
-    <View style={styles.inputContainer}>
-      <Text style={styles.label}>{label}</Text>
-      <TextInput
-        style={styles.input}
-        {...props}
-        placeholderTextColor={theme.colors.indigo100}
-      />
+    <View style={[styles.inputContainer, style]} {...rest}>
+      {children}
     </View>
   );
 };
 
-const Textarea = ({ label, ...props }: IInput) => {
+const Label = ({ children, ...rest }: TextProps) => {
   return (
-    <View style={styles.inputContainer}>
-      <Text style={styles.label}>{label}</Text>
-      <TextInput
-        style={styles.textarea}
-        {...props}
-        placeholderTextColor={theme.colors.indigo100}
-      />
-    </View>
+    <Text style={styles.label} {...rest}>
+      {children}
+    </Text>
   );
 };
 
-export { Input, Textarea };
+const Field = ({ ...rest }: TextInputProps) => {
+  return (
+    <TextInput
+      style={styles.input}
+      {...rest}
+      placeholderTextColor={theme.colors.indigo100}
+    />
+  );
+};
+
+const Textarea = ({ ...rest }: TextInputProps) => {
+  return (
+    <TextInput
+      style={styles.textarea}
+      placeholderTextColor={theme.colors.indigo100}
+      {...rest}
+    />
+  );
+};
+
+Input.Field = Field;
+Input.Textarea = Textarea;
+Input.Label = Label;
+
+export { Input };

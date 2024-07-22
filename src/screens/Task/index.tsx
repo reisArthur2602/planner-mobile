@@ -1,17 +1,17 @@
 import { Pressable, SafeAreaView, View } from 'react-native';
 import { styles } from './style';
 import TypeBar from '../../components/TypeBar';
-import { Input, Textarea } from '../../components/Input';
 
 import React, { useState } from 'react';
 import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
-import { format, isPast } from 'date-fns';
+import { format } from 'date-fns';
 import { Button, GhostButton } from '../../components/Button';
 import { TaskService } from '../../services/task/TaskService';
 import { useDashboard } from '../../hooks/useDashboard';
 import { useNavigation } from '@react-navigation/native';
+import { Input } from '../../components/Input';
 
 const Task = () => {
   const navigate = useNavigation();
@@ -56,25 +56,27 @@ const Task = () => {
   return (
     <SafeAreaView style={styles.taskContainer}>
       <TypeBar />
-      <Input
-        label="Título"
-        placeholder="Título da tarefa"
-        onChangeText={setTitle}
-      />
-      <Textarea
-        label="Descrição"
-        placeholder="Descrição da tarefa"
-        multiline
-        numberOfLines={4}
-        onChangeText={setDescription}
-      />
+
+      <Input>
+        <Input.Label>Título</Input.Label>
+        <Input.Field placeholder="Título da tarefa" onChangeText={setTitle} />
+      </Input>
+
+      <Input>
+        <Input.Textarea>Descrição</Input.Textarea>
+        <Input.Field
+          placeholder="Descrição da tarefa"
+          multiline
+          numberOfLines={4}
+          onChangeText={setDescription}
+        />
+      </Input>
 
       <Pressable onPress={() => setShowDate(true)}>
-        <Input
-          label="Data"
-          editable={false}
-          value={format(date, 'yyyy-MM-dd')}
-        />
+        <Input>
+          <Input.Label>Data</Input.Label>
+          <Input.Field editable={false} value={format(date, 'yyyy-MM-dd')} />
+        </Input>
       </Pressable>
 
       {showDate && (
@@ -87,7 +89,10 @@ const Task = () => {
       )}
 
       <Pressable onPress={() => setShowTime(true)}>
-        <Input label="Hora" editable={false} value={format(time, 'HH:mm')} />
+        <Input>
+          <Input.Label>Hora</Input.Label>
+          <Input.Field editable={false} value={format(time, 'HH:mm')} />
+        </Input>
       </Pressable>
 
       {showTime && (
