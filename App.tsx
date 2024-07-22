@@ -12,7 +12,8 @@ import {
 } from '@expo-google-fonts/inter';
 
 import { theme } from './src/theme';
-import Header from './src/components/Header';
+import { Header } from 'react-native/Libraries/NewAppScreen';
+
 
 export default function App() {
   const [fontsLoaded] = useFonts({

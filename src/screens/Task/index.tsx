@@ -7,11 +7,13 @@ import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
 import { format } from 'date-fns';
-import { Button, GhostButton } from '../../components/Button';
+
 import { TaskService } from '../../services/task/TaskService';
 import { useDashboard } from '../../hooks/useDashboard';
 import { useNavigation } from '@react-navigation/native';
-import { Input } from '../../components/Input';
+import { Input } from '../../components/ui/Input';
+import { Button, GhostButton } from '../../components/ui/Button';
+
 
 const Task = () => {
   const navigate = useNavigation();

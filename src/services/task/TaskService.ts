@@ -1,4 +1,4 @@
-import { FilterOptions } from '../../@types/filter';
+import { FilterOptions } from '../../screens/Dashboard/sessions/Filter/filter';
 import { Task } from '../../@types/task';
 import { Api } from '../api/axios-config';
 
