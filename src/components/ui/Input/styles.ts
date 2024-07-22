@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: 37,
     paddingHorizontal: 12,
-    color: theme.colors.indigo100,
+    color: theme.colors.indigo50,
     borderRadius: 6,
     borderColor: theme.colors.indigo700,
     borderWidth: 1,

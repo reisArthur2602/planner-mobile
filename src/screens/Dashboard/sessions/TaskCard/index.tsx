@@ -1,6 +1,5 @@
 import { View, Text, Pressable } from 'react-native';
-import React from 'react';
-import { format } from 'date-fns';
+
 import { TaskCardProps } from './task-list';
 import { styles } from './styles';
 

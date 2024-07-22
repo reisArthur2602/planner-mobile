@@ -7,7 +7,6 @@ import { TaskListProps } from './task-list';
 
 import TaskCard from '../TaskCard';
 import { RootTabParamList } from '../../../../routes/Tab/tab';
-// import { getTypeIcon } from '../../../../utils/type-icon';
 import { format } from 'date-fns';
 import { TYPES } from '../../../../utils/types';
 import { TypeTask } from '../../../../@types/task';
