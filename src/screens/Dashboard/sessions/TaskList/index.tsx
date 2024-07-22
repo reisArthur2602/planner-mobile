@@ -7,8 +7,10 @@ import { TaskListProps } from './task-list';
 
 import TaskCard from '../TaskCard';
 import { RootTabParamList } from '../../../../routes/Tab/tab';
-import { getTypeIcon } from '../../../../utils/type-icon';
+// import { getTypeIcon } from '../../../../utils/type-icon';
 import { format } from 'date-fns';
+import { TYPES } from '../../../../utils/types';
+import { TypeTask } from '../../../../@types/task';
 
 const TaskList = ({ tasks }: TaskListProps) => {
   const navigation =
@@ -16,6 +18,11 @@ const TaskList = ({ tasks }: TaskListProps) => {
 
   const navigateToEdit = (id: string) => {
     navigation.navigate('Edit', { id });
+  };
+
+  const getTypeIcon = (type: TypeTask) => {
+    const index = TYPES.findIndex((t) => t.type === type);
+    return TYPES[index].icon;
   };
 
   return (
