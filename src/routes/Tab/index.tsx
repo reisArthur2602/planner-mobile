@@ -1,14 +1,15 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Bell, Edit, House, SquareCheckBig } from 'lucide-react-native';
-import { RootTabParamList } from '../tab.routes';
+
 import { theme } from '../../theme';
 import Dashboard from '../../screens/Dashboard';
 import Task from '../../screens/Task';
 import Late from '../../screens/Late';
+import { RootTabParamList } from './tab';
 
 const { Navigator, Screen } = createBottomTabNavigator<RootTabParamList>();
 
-export default function () {
+const Tab = () => {
   return (
     <Navigator
       screenOptions={{
@@ -61,4 +62,6 @@ export default function () {
       />
     </Navigator>
   );
-}
+};
+
+export default Tab;

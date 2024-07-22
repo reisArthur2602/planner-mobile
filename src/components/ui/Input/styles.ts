@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { theme } from '../../theme';
+import { theme } from '../../../theme';
 
 export const styles = StyleSheet.create({
   inputContainer: {
@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
   },
 
   input: {
-    flex:1,
+    width: '100%',
     height: 37,
     paddingHorizontal: 12,
     color: theme.colors.indigo100,
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     borderStyle: 'solid',
   },
 
-  textarea:{
+  textarea: {
     height: 120,
     padding: 12,
     borderRadius: 6,
@@ -32,6 +32,6 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderStyle: 'solid',
     color: theme.colors.indigo100,
-    textAlignVertical:'top'
-  }
+    textAlignVertical: 'top',
+  },
 });

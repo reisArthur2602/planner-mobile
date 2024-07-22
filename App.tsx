@@ -1,7 +1,6 @@
 import { ActivityIndicator, StatusBar } from 'react-native';
 
 import { AuthProvider } from './src/context/Auth';
-import Routes from './src/routes';
 
 import {
   useFonts,
@@ -12,8 +11,9 @@ import {
 } from '@expo-google-fonts/inter';
 
 import { theme } from './src/theme';
-import { Header } from 'react-native/Libraries/NewAppScreen';
 
+import Routes from './src/routes';
+import Header from './src/components/ui/Header';
 
 export default function App() {
   const [fontsLoaded] = useFonts({

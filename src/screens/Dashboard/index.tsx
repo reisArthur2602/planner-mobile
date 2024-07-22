@@ -1,13 +1,13 @@
-import { FlatList, SafeAreaView } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { Task } from '../../@types/task';
+import { SafeAreaView } from 'react-native';
+import { TaskService } from '../../services/task/TaskService';
 import { styles } from './styles';
 import FilterBar from './sessions/FilterBar';
 
-import { TaskService } from '../../services/task/TaskService';
-import { Task } from '../../@types/task';
-import TaskCard from '../../components/TaskCard';
 import { FILTERS } from '../../utils/filters';
 import { FilterOptions } from './sessions/Filter/filter';
+import TaskList from './sessions/TaskList';
 
 const Dashboard = () => {
   const [filter, setFilter] = useState<FilterOptions>(FILTERS[0].type);
@@ -24,14 +24,8 @@ const Dashboard = () => {
 
   return (
     <SafeAreaView style={styles.dashboardContainer}>
-      {/* filtro */}
       <FilterBar filters={FILTERS} onChange={setFilter} filter={filter} />
-
-      <FlatList
-        data={tasks}
-        renderItem={({ item }) => <TaskCard {...item} key={item.id} />}
-        contentContainerStyle={{ gap: 12 }}
-      />
+      <TaskList tasks={tasks} />
     </SafeAreaView>
   );
 };

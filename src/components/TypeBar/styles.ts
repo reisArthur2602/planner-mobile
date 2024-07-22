@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { theme } from '../../theme';
-import { AlignCenter } from 'lucide-react-native';
+
 
 export const styles = StyleSheet.create({
   typeContainer: {

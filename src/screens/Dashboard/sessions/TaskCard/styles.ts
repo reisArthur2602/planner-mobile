@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
-import { theme } from '../../theme';
+import { theme } from '../../../../theme';
 
 export const styles = StyleSheet.create({
   taskContainer: {
-    maxHeight: 90,
+    maxHeight: 80,
     borderRadius: 12,
     paddingHorizontal: 18,
     paddingVertical: 24,

@@ -1,10 +1,10 @@
-import { SafeAreaView, FlatList, Text } from 'react-native';
+import { SafeAreaView, Text } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Task } from '../../@types/task';
 import { TaskService } from '../../services/task/TaskService';
 import { styles } from './styles';
 
-import TaskCard from '../../components/TaskCard';
+import TaskList from '../Dashboard/sessions/TaskList';
 
 const Late = () => {
   const [tasks, setTasks] = useState<Task[] | []>([]);
@@ -24,11 +24,7 @@ const Late = () => {
         Tarefas Atrasadas
         <Text style={styles.lateCount}>{`(${tasks.length})`}</Text>
       </Text>
-      <FlatList
-        data={tasks}
-        renderItem={({ item }) => <TaskCard {...item} key={item.id} />}
-        contentContainerStyle={{ gap: 12 }}
-      />
+      <TaskList tasks={tasks} />
     </SafeAreaView>
   );
 };

@@ -7,8 +7,9 @@ import {
   TextProps,
 } from 'react-native';
 import React from 'react';
-import { theme } from '../../theme';
+
 import { styles } from './styles';
+import { theme } from '../../../theme';
 
 const Input = ({ children, style, ...rest }: ViewProps) => {
   return (
@@ -30,8 +31,8 @@ const Field = ({ ...rest }: TextInputProps) => {
   return (
     <TextInput
       style={styles.input}
-      {...rest}
       placeholderTextColor={theme.colors.indigo100}
+      {...rest}
     />
   );
 };
@@ -46,8 +47,8 @@ const Textarea = ({ ...rest }: TextInputProps) => {
   );
 };
 
+Input.Label = Label;
 Input.Field = Field;
 Input.Textarea = Textarea;
-Input.Label = Label;
 
 export { Input };

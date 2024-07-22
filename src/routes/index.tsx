@@ -4,7 +4,7 @@ import { useAuth } from '../hooks/useAuth';
 import Tab from './Tab';
 import Stack from './Stack';
 
-export default function () {
+const Routes = () => {
   const { loading, auth } = useAuth();
 
   if (loading) return <ActivityIndicator size={60} />;
@@ -12,4 +12,6 @@ export default function () {
   return (
     <NavigationContainer>{auth ? <Tab /> : <Stack />}</NavigationContainer>
   );
-}
+};
+
+export default Routes;
