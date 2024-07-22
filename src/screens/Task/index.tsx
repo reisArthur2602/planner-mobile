@@ -1,22 +1,26 @@
-import { Pressable, SafeAreaView, View } from 'react-native';
-import { styles } from './style';
-import TypeBar from '../../components/TypeBar';
-
-import React, { useState } from 'react';
-import DateTimePicker, {
-  DateTimePickerEvent,
-} from '@react-native-community/datetimepicker';
-import { format } from 'date-fns';
-
-import { TaskService } from '../../services/task/TaskService';
-import { useDashboard } from '../../hooks/useDashboard';
+import { TYPES } from '../../utils/types';
 import { useNavigation } from '@react-navigation/native';
+import { TaskService } from '../../services/task/TaskService';
+import { TypeTask } from '../../@types/task';
+import { format } from 'date-fns';
+import React, { useEffect, useState } from 'react';
+
+import { SafeAreaView, View } from 'react-native';
+
+import TypeBar from './sessions/TypeBar';
 import { Input } from '../../components/ui/Input';
 import { Button } from '../../components/ui/Button';
+import { DateTime } from '../../components/ui/DateTime';
+
+import { styles } from './style';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { RootTabParamList } from '../../routes/Tab/tab';
 
 const Task = () => {
-  const navigate = useNavigation();
-  const { toggleType, type } = useDashboard();
+  const navigate =
+    useNavigation<BottomTabNavigationProp<RootTabParamList, 'Dashboard'>>();
+
+  const [type, setType] = useState<TypeTask>('gym');
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -24,39 +28,21 @@ const Task = () => {
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
 
-  const [showDate, setShowDate] = useState(false);
-  const [showTime, setShowTime] = useState(false);
-
   const onSubmit = async () => {
-    const data = {
+    await TaskService.create({
       title,
       description,
       type,
       when: `${format(date, 'yyyy-MM-dd')}T${format(time, 'HH:mm')}:00.000`,
-    };
-    await TaskService.create(data);
+    });
+
     alert('Tarefa criada com sucesso!');
-    toggleType('gym');
-    setTitle('');
-    setDescription('');
-    setDate(new Date());
-    setTime(new Date());
-    navigate.goBack();
-  };
-
-  const handleSelectDate = (e: DateTimePickerEvent, selectData?: Date) => {
-    setDate(selectData || date);
-    setShowDate(false);
-  };
-
-  const handleSelectTime = (e: DateTimePickerEvent, selectTime?: Date) => {
-    setTime(selectTime || time);
-    setShowTime(false);
+    navigate.navigate('Dashboard');
   };
 
   return (
     <SafeAreaView style={styles.taskContainer}>
-      <TypeBar />
+      <TypeBar type={type} onChange={setType} types={TYPES} />
 
       <Input>
         <Input.Label>Título</Input.Label>
@@ -73,37 +59,8 @@ const Task = () => {
         />
       </Input>
 
-      <Pressable onPress={() => setShowDate(true)}>
-        <Input>
-          <Input.Label>Data</Input.Label>
-          <Input.Field editable={false} value={format(date, 'yyyy-MM-dd')} />
-        </Input>
-      </Pressable>
-
-      {showDate && (
-        <DateTimePicker
-          value={date}
-          onChange={handleSelectDate}
-          mode="date"
-          display="spinner"
-        />
-      )}
-
-      <Pressable onPress={() => setShowTime(true)}>
-        <Input>
-          <Input.Label>Hora</Input.Label>
-          <Input.Field editable={false} value={format(time, 'HH:mm')} />
-        </Input>
-      </Pressable>
-
-      {showTime && (
-        <DateTimePicker
-          value={time}
-          onChange={handleSelectTime}
-          mode="time"
-          display="clock"
-        />
-      )}
+      <DateTime mode="date" onChange={setDate} value={date} />
+      <DateTime mode="time" onChange={setTime} value={time} />
 
       <View style={{ gap: 12 }}>
         <Button.Filled onPress={onSubmit}>
