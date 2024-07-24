@@ -1,7 +1,5 @@
 import { ActivityIndicator, StatusBar } from 'react-native';
 
-import { AuthProvider } from './src/context/Auth';
-
 import {
   useFonts,
   Inter_400Regular,
@@ -14,6 +12,7 @@ import { theme } from './src/theme';
 
 import Routes from './src/routes';
 import Header from './src/components/ui/Header';
+import { AuthProvider } from './src/context/Auth';
 
 export default function App() {
   const [fontsLoaded] = useFonts({

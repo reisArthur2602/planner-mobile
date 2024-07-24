@@ -1,6 +1,4 @@
 import { View } from 'react-native';
-import { TYPES } from '../../../../utils/types';
-
 import { styles } from './styles';
 import { TypeBarProps } from './type-bar';
 import TypeIcon from '../TypeIcon';
