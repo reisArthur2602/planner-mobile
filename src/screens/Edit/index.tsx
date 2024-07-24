@@ -26,6 +26,7 @@ import { theme } from '../../theme';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { Trash } from 'lucide-react-native';
 import { confirmModal } from '../../utils/confirm';
+import { format } from 'date-fns';
 
 const Edit = () => {
   const { params } = useRoute<RouteProp<RootTabParamList, 'Edit'>>();
@@ -54,7 +55,23 @@ const Edit = () => {
 
   const removeTask = async () => {
     await TaskService.remove(params.id);
-    alert('Tarefa foi excluída com sucesso!');
+    Alert.alert('Tarefa foi excluída com sucesso!');
+    navigate.navigate('Dashboard');
+  };
+
+ 
+
+  const updateTask = async () => {
+    await TaskService.update({
+      id: params.id,
+      description,
+      title,
+      done,
+      type,
+      when: `${format(date, 'yyyy-MM-dd')}T${format(time, 'HH:mm')}:00.000`,
+    });
+
+    Alert.alert('Tarefa atualizada com sucesso!');
     navigate.navigate('Dashboard');
   };
 
@@ -101,7 +118,14 @@ const Edit = () => {
         value={done}
       />
       <View style={{ gap: 12 }}>
-        <Button.Filled>
+        <Button.Filled
+          onPress={() =>
+            confirmModal({
+              title: 'Deseja realmente atualizar a tarefa?',
+              onPress: updateTask,
+            })
+          }
+        >
           <Button.Label>Salvar</Button.Label>
         </Button.Filled>
         <Button

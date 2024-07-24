@@ -17,7 +17,7 @@ const TaskCard = ({
     >
       <View style={styles.iconTask}>{typeIcon}</View>
 
-      <Text style={styles.title}>{task.title}</Text>
+      <Text style={styles.title} numberOfLines={1} ellipsizeMode='tail' >{task.title}</Text>
 
       <View style={{ alignItems: 'flex-end' }}>
         <Text style={styles.dateInfo}>{date}</Text>

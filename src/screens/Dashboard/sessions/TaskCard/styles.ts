@@ -4,8 +4,8 @@ import { theme } from '../../../../theme';
 export const styles = StyleSheet.create({
   taskContainer: {
     maxHeight: 80,
-    borderRadius: 12,
-    paddingHorizontal: 18,
+    borderRadius: 6,
+    paddingHorizontal: 12,
     paddingVertical: 24,
     borderColor: theme.colors.indigo700,
     borderStyle: 'solid',
@@ -13,20 +13,22 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    gap:12
   },
   iconTask: {
     backgroundColor: theme.colors.indigo600,
-    width: 45,
-    height: 45,
+    width: 40,
+    height: 40,
     borderRadius: 99,
     alignItems: 'center',
     justifyContent: 'center',
   },
   title: {
-    
-    fontSize: theme.font_size.sm,
+    flex: 1,
+    fontSize: theme.font_size.md,
     color: theme.colors.indigo50,
     fontFamily: theme.font_weight.semibold,
+    overflow:'hidden'
   },
   dateInfo: {
     fontSize: 10,

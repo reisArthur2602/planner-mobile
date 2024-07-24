@@ -3,6 +3,7 @@ import { UserService } from '../services/user/UserService';
 import { User } from '../@types/user';
 import { useToken } from '../hooks/useToken';
 import { Api } from '../services/api/axios-config';
+import { Alert } from 'react-native';
 
 interface IAuthContext {
   user: User | null;
@@ -39,7 +40,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     await UserService.auth({ email }).then((res) => {
       setUser(res);
       saveToken(res.id);
-      alert('Bem-vindo de volta! Login realizado com sucesso.');
+      Alert.alert('Bem-vindo de volta! Login realizado com sucesso.');
       setLoading(false);
     });
   };
@@ -48,7 +49,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     await UserService.create({ email }).then((res) => {
       setUser(res);
       saveToken(res.id);
-      alert('Cadastro realizado com sucesso! Seja Bem-vindo');
+      Alert.alert('Cadastro realizado com sucesso! Seja Bem-vindo');
       setLoading(false);
     });
   };
