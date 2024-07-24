@@ -1,15 +1,18 @@
-import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { styles } from './styles';
 
-import { Link } from '@react-navigation/native';
+import { Link, useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../hooks/useAuth';
 import { Input } from '../../components/ui/Input';
 import { Button } from '../../components/ui/Button';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackParamList } from '../../routes/Stack/stack';
 
 const Login = () => {
   const { handleLogin } = useAuth();
   const [email, setEmail] = useState('');
+  const navigate = useNavigation<NativeStackNavigationProp<StackParamList>>();
 
   const OnSubmit = async () => {
     if (!email) return alert('O email é obrigatório');
@@ -18,16 +21,13 @@ const Login = () => {
 
   return (
     <SafeAreaView style={styles.loginContainer}>
-      {/* form */}
       <View style={styles.formContainer}>
-        {/* title */}
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Entrar na sua conta</Text>
           <Text style={styles.subtitle}>
             Preencha o formulário para entrar na sua conta
           </Text>
         </View>
-        {/* input button qrcode*/}
 
         <View style={{ gap: 12 }}>
           <Input>
@@ -41,10 +41,10 @@ const Login = () => {
           <Button.Filled onPress={OnSubmit}>
             <Button.Label>Entrar</Button.Label>
           </Button.Filled>
-          
-          <TouchableOpacity style={styles.qrContainer}>
-            <Text style={styles.qrText}>Entrar com código QR</Text>
-          </TouchableOpacity>
+
+          <Button onPress={() => navigate.navigate('Qrcode')}>
+            <Button.Label>Entrar com código QR</Button.Label>
+          </Button>
         </View>
         <Text style={styles.linkContainer}>
           Não possui uma conta? {''}
