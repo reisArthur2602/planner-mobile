@@ -1,5 +1,5 @@
 import { TYPES } from '../../utils/types';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { TaskService } from '../../services/task/TaskService';
 import { TypeTask } from '../../@types/task';
 import { format } from 'date-fns';
@@ -27,7 +27,7 @@ const Task = () => {
 
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
-
+  const isFocused = useIsFocused();
   const onSubmit = async () => {
     await TaskService.create({
       title,
@@ -36,9 +36,17 @@ const Task = () => {
       when: `${format(date, 'yyyy-MM-dd')}T${format(time, 'HH:mm')}:00.000`,
     });
 
-    alert('Tarefa criada com sucesso!');
     navigate.navigate('Dashboard');
+    alert('Tarefa criada com sucesso!');
   };
+
+  useEffect(() => {
+    setType('gym');
+    setTitle('');
+    setDescription('');
+    setDate(new Date());
+    setTime(new Date());
+  }, [isFocused]);
 
   return (
     <SafeAreaView style={styles.taskContainer}>
@@ -46,7 +54,11 @@ const Task = () => {
 
       <Input>
         <Input.Label>Título</Input.Label>
-        <Input.Field placeholder="Título da tarefa" onChangeText={setTitle} />
+        <Input.Field
+          placeholder="Título da tarefa"
+          onChangeText={setTitle}
+          value={title}
+        />
       </Input>
 
       <Input>
@@ -56,6 +68,7 @@ const Task = () => {
           multiline
           numberOfLines={4}
           onChangeText={setDescription}
+          value={description}
         />
       </Input>
 

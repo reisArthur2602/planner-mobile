@@ -12,11 +12,14 @@ const getByFilter = async (filter: FilterOptions): Promise<Task[] | []> => {
   const { data } = await Api.get(`/task/${filter}`);
   return data;
 };
-
+const getById = async (id: string): Promise<Task> => {
+  const { data } = await Api.get(`/task/${id}`);
+  return data;
+};
 
 const late = async (): Promise<Task[] | []> => {
   const { data } = await Api.get('/task/late');
   return data;
 };
 
-export const TaskService = { create, getByFilter , late };
+export const TaskService = { create, getByFilter, getById, late };

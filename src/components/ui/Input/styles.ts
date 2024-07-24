@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     borderColor: theme.colors.indigo700,
     borderWidth: 1,
     borderStyle: 'solid',
-    color: theme.colors.indigo100,
+    color: theme.colors.indigo50,
     textAlignVertical: 'top',
   },
 });

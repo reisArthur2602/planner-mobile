@@ -7,7 +7,7 @@ import { FilterProps } from './filter';
 
 const Filter = ({ filter, title, selected, onChange }: FilterProps) => {
   return (
-    <Pressable>
+    <Pressable style={styles.filterContainer}>
       <Text
         style={[styles.filterText, selected && styles.selectedFilter]}
         onPress={() => onChange(filter)}

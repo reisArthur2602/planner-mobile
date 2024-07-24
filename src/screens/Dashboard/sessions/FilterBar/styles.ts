@@ -4,7 +4,6 @@ import { theme } from '../../../../theme';
 export const styles = StyleSheet.create({
   filterContainer: {
     width: '100%',
-    height: 67,
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',

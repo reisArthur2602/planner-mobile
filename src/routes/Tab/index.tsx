@@ -1,11 +1,12 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Bell, Edit, House, SquareCheckBig } from 'lucide-react-native';
+import { Bell, House, SquareCheckBig } from 'lucide-react-native';
 
 import { theme } from '../../theme';
 import Dashboard from '../../screens/Dashboard';
 import Task from '../../screens/Task';
 import Late from '../../screens/Late';
 import { RootTabParamList } from './tab';
+import Edit from '../../screens/Edit';
 
 const { Navigator, Screen } = createBottomTabNavigator<RootTabParamList>();
 

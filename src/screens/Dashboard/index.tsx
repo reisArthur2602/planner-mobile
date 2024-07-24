@@ -8,10 +8,12 @@ import FilterBar from './sessions/FilterBar';
 import { FILTERS } from '../../utils/filters';
 import { FilterOptions } from './sessions/Filter/filter';
 import TaskList from './sessions/TaskList';
+import { useIsFocused } from '@react-navigation/native';
 
 const Dashboard = () => {
   const [filter, setFilter] = useState<FilterOptions>(FILTERS[0].type);
   const [tasks, setTasks] = useState<Task[] | []>([]);
+  const isFocused = useIsFocused();
 
   const fetchTasks = async () => {
     const data = await TaskService.getByFilter(filter);
@@ -20,7 +22,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchTasks();
-  }, [filter]);
+  }, [filter, isFocused]);
 
   return (
     <SafeAreaView style={styles.dashboardContainer}>

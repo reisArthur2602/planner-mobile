@@ -5,11 +5,11 @@ import { useNavigation } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { TaskListProps } from './task-list';
 
-import TaskCard from '../TaskCard';
 import { RootTabParamList } from '../../../../routes/Tab/tab';
 import { format } from 'date-fns';
 import { TYPES } from '../../../../utils/types';
 import { TypeTask } from '../../../../@types/task';
+import TaskCard from '../TaskCard';
 
 const TaskList = ({ tasks }: TaskListProps) => {
   const navigation =
