@@ -16,7 +16,7 @@ const Dashboard = () => {
   const isFocused = useIsFocused();
 
   const fetchTasks = async () => {
-    const data = await TaskService.getByFilter(filter);
+    const data = (await TaskService.getByFilter(filter)).filter((t) => !t.done);
     setTasks(data);
   };
 
