@@ -27,11 +27,14 @@ import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { Trash } from 'lucide-react-native';
 import { confirmModal } from '../../utils/confirm';
 import { format } from 'date-fns';
+import Loading from '../../components/ui/Loading';
 
 const Edit = () => {
   const { params } = useRoute<RouteProp<RootTabParamList, 'Edit'>>();
   const navigate =
     useNavigation<BottomTabNavigationProp<RootTabParamList, 'Dashboard'>>();
+
+  const [loading, setLoading] = useState<boolean>(true);
 
   const [type, setType] = useState<TypeTask>('gym');
   const [done, setDone] = useState<boolean>(false);
@@ -71,9 +74,12 @@ const Edit = () => {
         setDone(response.done);
         setDate(new Date(response.when));
         setTime(new Date(response.when));
+        setLoading(false);
       });
     })();
   }, [params.id]);
+
+  if (loading) return <Loading />;
 
   return (
     <ScrollView

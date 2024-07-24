@@ -1,4 +1,5 @@
 import { AxiosError } from 'axios';
+import { Alert } from 'react-native';
 
 export const errorInterceptor = (error: AxiosError) => {
   const errorMessage = (error.response?.data as { message: string }).message;
@@ -8,13 +9,13 @@ export const errorInterceptor = (error: AxiosError) => {
       error.response?.data as [{ path: string; message: string }]
     ).map((err) => err.message);
 
-    errorMessage.forEach((err) => alert(err));
+    errorMessage.forEach((err) => Alert.alert(err));
 
     return Promise.reject(errorMessage);
   } else if (error.response?.status == 401) {
-    return console.log(errorMessage);
+    return Promise.reject(errorMessage);
   } else {
-    alert(errorMessage);
+    Alert.alert(errorMessage);
     return Promise.reject(errorMessage);
   }
 };

@@ -9,19 +9,24 @@ import { FILTERS } from '../../utils/filters';
 import { FilterOptions } from './sessions/Filter/filter';
 import TaskList from './sessions/TaskList';
 import { useIsFocused } from '@react-navigation/native';
+import Loading from '../../components/ui/Loading';
 
 const Dashboard = () => {
   const [filter, setFilter] = useState<FilterOptions>(FILTERS[0].type);
   const [tasks, setTasks] = useState<Task[] | []>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const isFocused = useIsFocused();
 
   useEffect(() => {
     (async () => {
-      await TaskService.getByFilter(filter).then((response) =>
-        setTasks(response.filter((t) => !t.done))
-      );
+      await TaskService.getByFilter(filter).then((response) => {
+        setTasks(response.filter((t) => !t.done));
+        setLoading(false);
+      });
     })();
   }, [filter, isFocused]);
+
+  if (loading) return <Loading />;
 
   return (
     <SafeAreaView style={styles.dashboardContainer}>
