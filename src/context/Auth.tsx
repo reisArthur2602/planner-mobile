@@ -11,6 +11,7 @@ interface IAuthContext {
   loading: boolean;
   handleLogin(email: string): Promise<void>;
   handleRegister(email: string): Promise<void>;
+  handleLogout(): Promise<void>;
 }
 
 export const AuthContext = createContext({} as IAuthContext);
@@ -18,23 +19,17 @@ export const AuthContext = createContext({} as IAuthContext);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const { saveToken, getToken } = useToken();
+  const { saveToken, getToken, deleteToken } = useToken();
 
   useEffect(() => {
-    getUserLocalStorage();
-  }, []);
-
-  const getUserLocalStorage = async () => {
-    const token = await getToken();
-    if (token) {
+    (async () => {
+      const token = await getToken();
+      if (token === null) return setLoading(false);
       Api.defaults.headers['userid'] = token;
-      const details = await UserService.details();
-      setUser(details);
+      await UserService.details().then((response) => setUser(response));
       setLoading(false);
-    } else {
-      setLoading(false);
-    }
-  };
+    })();
+  }, []);
 
   const handleLogin = async (email: string) => {
     await UserService.auth({ email }).then((res) => {
@@ -54,9 +49,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  const handleLogout = async () => {
+    await deleteToken();
+    setUser(null);
+  };
+
   return (
     <AuthContext.Provider
-      value={{ user, loading, auth: !!user, handleLogin, handleRegister }}
+      value={{
+        user,
+        loading,
+        auth: !!user,
+        handleLogin,
+        handleRegister,
+        handleLogout,
+      }}
     >
       {children}
     </AuthContext.Provider>

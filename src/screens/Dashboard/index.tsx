@@ -15,13 +15,12 @@ const Dashboard = () => {
   const [tasks, setTasks] = useState<Task[] | []>([]);
   const isFocused = useIsFocused();
 
-  const fetchTasks = async () => {
-    const data = (await TaskService.getByFilter(filter)).filter((t) => !t.done);
-    setTasks(data);
-  };
-
   useEffect(() => {
-    fetchTasks();
+    (async () => {
+      await TaskService.getByFilter(filter).then((response) =>
+        setTasks(response.filter((t) => !t.done))
+      );
+    })();
   }, [filter, isFocused]);
 
   return (

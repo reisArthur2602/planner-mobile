@@ -10,13 +10,13 @@ import { useIsFocused } from '@react-navigation/native';
 const Late = () => {
   const [tasks, setTasks] = useState<Task[] | []>([]);
   const isFocused = useIsFocused();
-  const fetchTasks = async () => {
-    const data = await TaskService.late();
-    setTasks(data);
-  };
 
   useEffect(() => {
-    fetchTasks();
+    (async () => {
+      await TaskService.late().then((response) =>
+        setTasks(response.filter((t) => !t.done))
+      );
+    })();
   }, [isFocused]);
 
   return (

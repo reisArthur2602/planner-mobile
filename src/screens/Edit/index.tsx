@@ -32,7 +32,6 @@ const Edit = () => {
   const { params } = useRoute<RouteProp<RootTabParamList, 'Edit'>>();
   const navigate =
     useNavigation<BottomTabNavigationProp<RootTabParamList, 'Dashboard'>>();
-  const isFocused = useIsFocused();
 
   const [type, setType] = useState<TypeTask>('gym');
   const [done, setDone] = useState<boolean>(false);
@@ -43,23 +42,11 @@ const Edit = () => {
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
 
-  const fetchTask = async () => {
-    const response = await TaskService.getById(params.id);
-    setTitle(response.title);
-    setDescription(response.description);
-    setType(response.type);
-    setDone(response.done);
-    setDate(new Date(response.when));
-    setTime(new Date(response.when));
-  };
-
   const removeTask = async () => {
     await TaskService.remove(params.id);
     Alert.alert('Tarefa foi excluída com sucesso!');
     navigate.navigate('Dashboard');
   };
-
- 
 
   const updateTask = async () => {
     await TaskService.update({
@@ -76,7 +63,16 @@ const Edit = () => {
   };
 
   useEffect(() => {
-    fetchTask();
+    (async () => {
+      await TaskService.getById(params.id).then((response) => {
+        setTitle(response.title);
+        setDescription(response.description);
+        setType(response.type);
+        setDone(response.done);
+        setDate(new Date(response.when));
+        setTime(new Date(response.when));
+      });
+    })();
   }, [params.id]);
 
   return (

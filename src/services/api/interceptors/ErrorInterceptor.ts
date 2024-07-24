@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import { AxiosError } from 'axios';
 
 export const errorInterceptor = (error: AxiosError) => {
   const errorMessage = (error.response?.data as { message: string }).message;
@@ -12,7 +12,7 @@ export const errorInterceptor = (error: AxiosError) => {
 
     return Promise.reject(errorMessage);
   } else if (error.response?.status == 401) {
-    return Promise.reject(errorMessage);
+    return console.log(errorMessage);
   } else {
     alert(errorMessage);
     return Promise.reject(errorMessage);

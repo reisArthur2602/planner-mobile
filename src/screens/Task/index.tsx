@@ -27,7 +27,9 @@ const Task = () => {
 
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
+  
   const isFocused = useIsFocused();
+
   const onSubmit = async () => {
     await TaskService.create({
       title,
