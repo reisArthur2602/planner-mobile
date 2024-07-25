@@ -5,9 +5,9 @@ import Stack from './Stack';
 import Loading from '../components/ui/Loading';
 
 const Routes = () => {
-  const { loading, auth } = useAuth();
+  const { loadingAuth, auth } = useAuth();
 
-  if (loading) return <Loading />;
+  if (loadingAuth) return <Loading />;
 
   return (
     <NavigationContainer>{auth ? <Tab /> : <Stack />}</NavigationContainer>

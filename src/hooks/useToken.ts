@@ -19,8 +19,9 @@ export const useToken = (): IUseToken => {
   };
 
   const deleteToken = async () => {
-    delete Api.defaults.headers['userid'];
-    await AsyncStorage.removeItem('access-token');
+    await AsyncStorage.clear().then(
+      () => delete Api.defaults.headers['userid']
+    );
   };
 
   return { saveToken, getToken, deleteToken };

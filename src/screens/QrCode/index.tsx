@@ -23,7 +23,7 @@ const QrCode = () => {
   }, []);
 
   const onScanner = async ({ data }: BarcodeScanningResult) => {
-    if (hasPermission) {
+    if (!hasPermission) {
       Alert.alert('Você precisa permitir que o aplicativo acesse a câmera');
       navigate.goBack();
     }
@@ -38,9 +38,9 @@ const QrCode = () => {
       <CameraView
         onBarcodeScanned={onScanner}
         barcodeScannerSettings={{
-          barcodeTypes: ['qr', 'pdf417'],
+          barcodeTypes: ['qr'],
         }}
-        style={{ width: 300, height: 300 }}
+        style={{ width: 250, height: 250 }}
       />
     </SafeAreaView>
   );

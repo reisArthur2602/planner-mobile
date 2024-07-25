@@ -4,11 +4,12 @@ import { User } from '../@types/user';
 import { useToken } from '../hooks/useToken';
 import { Api } from '../services/api/axios-config';
 import { Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface IAuthContext {
   user: User | null;
   auth: boolean;
-  loading: boolean;
+  loadingAuth: boolean;
   handleLogin(email: string): Promise<void>;
   handleRegister(email: string): Promise<void>;
   handleLogout(): Promise<void>;
@@ -18,16 +19,18 @@ export const AuthContext = createContext({} as IAuthContext);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loadingAuth, setLoadingAuth] = useState<boolean>(true);
   const { saveToken, getToken, deleteToken } = useToken();
 
   useEffect(() => {
     (async () => {
       const token = await getToken();
-      if (token === null) return setLoading(false);
-      Api.defaults.headers['userid'] = token;
-      await UserService.details().then((response) => setUser(response));
-      setLoading(false);
+
+      if (token !== null) {
+        Api.defaults.headers['userid'] = token;
+        await UserService.details().then((response) => setUser(response));
+        setLoadingAuth(false);
+      } else return setLoadingAuth(false);
     })();
   }, []);
 
@@ -35,8 +38,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     await UserService.auth({ email }).then((res) => {
       setUser(res);
       saveToken(res.id);
-      Alert.alert('Bem-vindo de volta! Login realizado com sucesso.');
-      setLoading(false);
+      setLoadingAuth(false);
     });
   };
 
@@ -44,13 +46,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     await UserService.create({ email }).then((res) => {
       setUser(res);
       saveToken(res.id);
-      Alert.alert('Cadastro realizado com sucesso! Seja Bem-vindo');
-      setLoading(false);
+      setLoadingAuth(false);
     });
   };
 
   const handleLogout = async () => {
-    await deleteToken();
+    await AsyncStorage.clear();
     setUser(null);
   };
 
@@ -58,7 +59,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     <AuthContext.Provider
       value={{
         user,
-        loading,
+        loadingAuth,
         auth: !!user,
         handleLogin,
         handleRegister,

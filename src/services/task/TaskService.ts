@@ -29,15 +29,12 @@ const update = async (data: Omit<Task, 'user_id'>): Promise<void> => {
 const remove = async (id: string): Promise<void> => {
   await Api.delete(`/task/${id}`);
 };
-const done = async (params: Pick<Task, 'id' | 'done'>): Promise<void> => {
-  await Api.patch(`/task/${params.id}/${params.done}`);
-};
+
 
 export const TaskService = {
   create,
   update,
   remove,
-  done,
   late,
   getByFilter,
   getById,

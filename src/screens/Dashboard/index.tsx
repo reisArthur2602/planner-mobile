@@ -9,7 +9,9 @@ import { FILTERS } from '../../utils/filters';
 import { FilterOptions } from './sessions/Filter/filter';
 import TaskList from './sessions/TaskList';
 import { useIsFocused } from '@react-navigation/native';
+
 import Loading from '../../components/ui/Loading';
+import Empty from '../../components/ui/Empty';
 
 const Dashboard = () => {
   const [filter, setFilter] = useState<FilterOptions>(FILTERS[0].type);
@@ -27,11 +29,15 @@ const Dashboard = () => {
   }, [filter, isFocused]);
 
   if (loading) return <Loading />;
-
+ 
   return (
     <SafeAreaView style={styles.dashboardContainer}>
       <FilterBar filters={FILTERS} onChange={setFilter} filter={filter} />
-      <TaskList tasks={tasks} />
+      {tasks.length === 0 ? (
+        <Empty title="Nenhuma tarefa pendente" />
+      ) : (
+        <TaskList tasks={tasks} />
+      )}
     </SafeAreaView>
   );
 };

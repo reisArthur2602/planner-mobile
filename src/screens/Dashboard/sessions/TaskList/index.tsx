@@ -27,6 +27,7 @@ const TaskList = ({ tasks }: TaskListProps) => {
   return (
     <FlatList
       data={tasks}
+      contentContainerStyle={{gap:12}}
       renderItem={({ item }) => (
         <TaskCard
           task={item}

@@ -7,6 +7,7 @@ import { styles } from './styles';
 import TaskList from '../Dashboard/sessions/TaskList';
 import { useIsFocused } from '@react-navigation/native';
 import Loading from '../../components/ui/Loading';
+import Empty from '../../components/ui/Empty';
 
 const Late = () => {
   const [tasks, setTasks] = useState<Task[] | []>([]);
@@ -25,11 +26,17 @@ const Late = () => {
   if (loading) return <Loading />;
   return (
     <SafeAreaView style={styles.LateContainer}>
-      <Text style={styles.lateTitle}>
-        Tarefas Atrasadas
-        <Text style={styles.lateCount}>{`(${tasks.length})`}</Text>
-      </Text>
-      <TaskList tasks={tasks} />
+      {tasks.length === 0 ? (
+        <Empty title="Nenhuma tarefa atrasada" />
+      ) : (
+        <>
+          <Text style={styles.lateTitle}>
+            Tarefas Atrasadas
+            <Text style={styles.lateCount}>{`(${tasks.length})`}</Text>
+          </Text>
+          <TaskList tasks={tasks} />
+        </>
+      )}
     </SafeAreaView>
   );
 };
