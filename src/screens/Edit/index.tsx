@@ -52,13 +52,17 @@ const Edit = () => {
   };
 
   const updateTask = async () => {
+    const formatToIso = new Date(
+      `${format(date, 'yyyy-MM-dd')}T${format(time, 'HH:mm')}:00.000`
+    ).toISOString();
+    
     await TaskService.update({
       id: params.id,
       description,
       title,
       done,
       type,
-      when: `${format(date, 'yyyy-MM-dd')}T${format(time, 'HH:mm')}:00.000`,
+      when: formatToIso,
     });
 
     Alert.alert('Tarefa atualizada com sucesso!');

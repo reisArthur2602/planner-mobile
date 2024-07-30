@@ -5,7 +5,7 @@ import { TypeTask } from '../../@types/task';
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 
-import { SafeAreaView, View } from 'react-native';
+import { Alert, SafeAreaView, View } from 'react-native';
 
 import TypeBar from './sessions/TypeBar';
 import { Input } from '../../components/ui/Input';
@@ -27,19 +27,23 @@ const Task = () => {
 
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
-  
+
   const isFocused = useIsFocused();
 
   const onSubmit = async () => {
+    const formatToIso = new Date(
+      `${format(date, 'yyyy-MM-dd')}T${format(time, 'HH:mm')}:00.000`
+    ).toISOString();
+
     await TaskService.create({
       title,
       description,
       type,
-      when: `${format(date, 'yyyy-MM-dd')}T${format(time, 'HH:mm')}:00.000`,
+      when: formatToIso,
     });
 
     navigate.navigate('Dashboard');
-    alert('Tarefa criada com sucesso!');
+    Alert.alert('Tarefa criada com sucesso!');
   };
 
   useEffect(() => {
