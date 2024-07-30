@@ -3,7 +3,6 @@ import { UserService } from '../services/user/UserService';
 import { User } from '../@types/user';
 import { useToken } from '../hooks/useToken';
 import { Api } from '../services/api/axios-config';
-import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface IAuthContext {
@@ -19,7 +18,7 @@ export const AuthContext = createContext({} as IAuthContext);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [loadingAuth, setLoadingAuth] = useState<boolean>(true);
+  const [loadingAuth, setLoadingAuth] = useState<boolean>(false);
   const { saveToken, getToken, deleteToken } = useToken();
 
   useEffect(() => {
@@ -28,26 +27,33 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       if (token !== null) {
         Api.defaults.headers['userid'] = token;
-        await UserService.details().then((response) => setUser(response));
-        setLoadingAuth(false);
-      } else return setLoadingAuth(false);
+        setLoadingAuth(true);
+        await UserService.details()
+          .then((response) => setUser(response))
+          .catch(async () => await deleteToken())
+          .finally(() => setLoadingAuth(false));
+      }
     })();
   }, []);
 
   const handleLogin = async (email: string) => {
-    await UserService.auth({ email }).then((res) => {
-      setUser(res);
-      saveToken(res.id);
-      setLoadingAuth(false);
-    });
+    setLoadingAuth(true);
+    await UserService.auth({ email })
+      .then((res) => {
+        setUser(res);
+        saveToken(res.id);
+      })
+      .finally(() => setLoadingAuth(false));
   };
 
   const handleRegister = async (email: string) => {
-    await UserService.create({ email }).then((res) => {
-      setUser(res);
-      saveToken(res.id);
-      setLoadingAuth(false);
-    });
+    setLoadingAuth(true);
+    await UserService.create({ email })
+      .then((res) => {
+        setUser(res);
+        saveToken(res.id);
+      })
+      .finally(() => setLoadingAuth(false));
   };
 
   const handleLogout = async () => {
