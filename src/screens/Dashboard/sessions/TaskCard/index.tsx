@@ -1,6 +1,6 @@
 import { View, Text, Pressable } from 'react-native';
 
-import { TaskCardProps } from './task-list';
+import { TaskCardProps } from './task-card';
 import { styles } from './styles';
 
 const TaskCard = ({
@@ -12,7 +12,7 @@ const TaskCard = ({
 }: TaskCardProps) => {
   return (
     <Pressable
-      style={styles.taskContainer}
+      style={[styles.taskContainer , task.done && styles.doneTask]}
       onPress={() => onNavigation(task.id)}
     >
       <View style={styles.iconTask}>{typeIcon}</View>

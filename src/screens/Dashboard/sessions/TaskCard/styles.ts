@@ -35,4 +35,7 @@ export const styles = StyleSheet.create({
     color: theme.colors.indigo100,
     fontFamily: theme.font_weight.regular,
   },
+  doneTask :{
+    opacity:0.3
+  }
 });

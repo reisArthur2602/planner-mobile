@@ -17,7 +17,7 @@ const Late = () => {
   useEffect(() => {
     (async () => {
       await TaskService.late().then((response) => {
-        setTasks(response.filter((t) => !t.done));
+        setTasks(response);
         setLoading(false);
       });
     })();

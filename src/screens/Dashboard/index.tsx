@@ -22,7 +22,7 @@ const Dashboard = () => {
   useEffect(() => {
     (async () => {
       await TaskService.getByFilter(filter).then((response) => {
-        setTasks(response.filter((t) => !t.done));
+        setTasks(response);
         setLoading(false);
       });
     })();
