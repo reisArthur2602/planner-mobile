@@ -40,6 +40,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setLoadingAuth(true);
     await UserService.auth({ email })
       .then((res) => {
+        console.log("passei aq")
         setUser(res);
         saveToken(res.id);
       })

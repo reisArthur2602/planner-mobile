@@ -1,15 +1,18 @@
+import Constants from 'expo-constants';
+import axios from 'axios';
+import { errorInterceptor, responseInterceptor } from './interceptors';
 
-import axios from "axios";
-import { errorInterceptor, responseInterceptor } from "./interceptors";
+const { apiUrl } = Constants.expoConfig?.extra as {
+  apiUrl: string;
+};
 
 const Api = axios.create({
-  baseURL: 'https://planner-backend-k43w.onrender.com',
+  baseURL: apiUrl,
 });
 
-
 Api.interceptors.response.use(
-    (response) => responseInterceptor(response),
-    (error) => errorInterceptor(error)
-  );
+  (response) => responseInterceptor(response),
+  (error) => errorInterceptor(error)
+);
 
 export { Api };
