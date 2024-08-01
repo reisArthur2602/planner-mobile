@@ -16,11 +16,13 @@ import Empty from '../../components/ui/Empty';
 const Dashboard = () => {
   const [filter, setFilter] = useState<FilterOptions>(FILTERS[0].type);
   const [tasks, setTasks] = useState<Task[] | []>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
+
   const isFocused = useIsFocused();
 
   useEffect(() => {
     (async () => {
+      setLoading(true);
       await TaskService.getByFilter(filter).then((response) => {
         setTasks(response);
         setLoading(false);
@@ -29,7 +31,7 @@ const Dashboard = () => {
   }, [filter, isFocused]);
 
   if (loading) return <Loading />;
- 
+
   return (
     <SafeAreaView style={styles.dashboardContainer}>
       <FilterBar filters={FILTERS} onChange={setFilter} filter={filter} />

@@ -47,7 +47,6 @@ const Edit = () => {
 
   const removeTask = async () => {
     await TaskService.remove(params.id);
-    Alert.alert('Tarefa foi excluída com sucesso!');
     navigate.navigate('Dashboard');
   };
 
@@ -55,7 +54,7 @@ const Edit = () => {
     const formatToIso = new Date(
       `${format(date, 'yyyy-MM-dd')}T${format(time, 'HH:mm')}:00.000`
     ).toISOString();
-    
+
     await TaskService.update({
       id: params.id,
       description,

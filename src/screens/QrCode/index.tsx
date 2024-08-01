@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const QrCode = () => {
   const [hasPermission, setHasPermission] = useState<boolean>(false);
+  const [scannedData, setScannedData] = useState<string | null>(null);
 
   const { handleLogin } = useAuth();
   const navigate = useNavigation<NativeStackNavigationProp<StackParamList>>();
@@ -26,7 +27,10 @@ const QrCode = () => {
     if (!hasPermission) {
       Alert.alert('Você precisa permitir que o aplicativo acesse a câmera');
       navigate.goBack();
+      return;
     }
+
+    setScannedData(data);
 
     await handleLogin(data);
   };
