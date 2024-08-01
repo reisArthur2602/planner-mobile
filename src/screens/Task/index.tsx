@@ -86,7 +86,7 @@ const Task = () => {
           <Button.Label>Criar</Button.Label>
         </Button.Filled>
 
-        <Button>
+        <Button onPress={()=>navigate.navigate("Dashboard")}>
           <Button.Label>Cancelar</Button.Label>
         </Button>
       </View>
