@@ -20,49 +20,18 @@
 ## 🚀 Dependências
 
 > Requisitos para rodar o projeto...
+
 > <br/>
 
-## `📖 Instalação - Mobile`
+## `📖 Instalação`
 
 <br />
 
-> Clone o repositório
-
-```
-git clone https://github.com/reisArthur2602/planner-mobile
-```
-
-<br />
-
-> Rode o projeto
-
-Para instalar as dependências `npm install`
-Rode `npm audix fix` caso necessário
-Para rodar o projeto `npx expo start`
-
-<br />
-
-> Configure as variáveis de ambiente
-
-Crie um arquivo .env na raiz do projeto `API_URL=API_URL`
-
-## `📖 Instalação - Backend`
-
-<br />
-
-> Clone o repositório do backend
-
-```
-git clone https://github.com/reisArthur2602/planner-backend
-```
-
-<br />
-
-> Rode o backend
-
-Para instalar as dependências `npm install`
-
-Para rodar `npm run dev`
+> Como iniciar 
+1. Clone o repósitório `git clone https://github.com/reisArthur2602/planner-mobile`
+2. Instale as dependências `npm install` (Rode `npm audit fix` caso necessário)
+3. Configure as variáveis de ambiente na raiz do projeto `API_URL=API_URL`
+4. Para rodar o projeto `npx expo start`
 
 <br />
 
